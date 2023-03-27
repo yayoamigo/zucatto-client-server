@@ -4,7 +4,7 @@ import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 60vh;
-  background-color: #f0d700;
+  background-color: #2cd5af;
   display: flex;
   align-items: center;
   justify-content: center;

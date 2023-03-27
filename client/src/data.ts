@@ -29,16 +29,19 @@ export const sliderItems = [
       id: 1,
       img: "4.jpg",
       title: "SHIRT STYLE!",
+      cat: "women"
     },
     {
       id: 2,
       img: "5.jpg",
       title: "LOUNGEWEAR LOVE",
+      cat: "boys"
     },
     {
       id: 3,
       img: "6.jpg",
       title: "LIGHT JACKETS",
+      cat: "jeans"
     },
   ];
 
@@ -49,7 +52,7 @@ export const sliderItems = [
     },
     {
       id:2,
-      img:"7.png",
+      img:"/7.png",
     },
     {
       id:3,
@@ -57,7 +60,7 @@ export const sliderItems = [
     },
     {
       id:4,
-      img:"9.png",
+      img:"/9.png",
     },
     {
       id:5,
@@ -69,7 +72,7 @@ export const sliderItems = [
     },
     {
       id:7,
-      img:"9.png",
+      img:"/9.png",
     },
     {
       id:8,

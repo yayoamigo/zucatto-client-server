@@ -13,7 +13,7 @@ const Home = () => {
       <Navbar />
       <Slider />
       <Categories />
-      <Products/>
+      <Products cat={""} filters={null} sort={""}/>
       <Newsletter/>
       <Footer/>
     </div>

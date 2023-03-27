@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 interface Props {
     item: {
         'img': any;
         'title': string;
+        'cat': string;
     };
 };
 
@@ -51,11 +53,13 @@ const Button = styled.button`
 const CategoryItem = ({ item} : Props) => {
   return (
     <Container>
-      <Image src={item.img} />
+      <Link to={`/products/${item.cat}`}> 
+      <Image src={ item.img} />
       <Info>
         <Title>{item.title}</Title>
         <Button>SHOP NOW</Button>
       </Info>
+      </Link>
     </Container>
   );
 };
