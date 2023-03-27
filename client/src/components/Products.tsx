@@ -9,7 +9,16 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
-const Products = () => {
+//create props for the products
+
+interface Props {
+  cat: string;
+  filters: {} | null;
+  sort: string;
+}
+
+const Products = ({ cat, filters, sort }: Props) => {
+  console.log(cat, filters, sort)
   return (
     <Container>
       {popularProducts.map((item) => (
@@ -17,6 +26,6 @@ const Products = () => {
       ))}
     </Container>
   );
-};
+      }
 
 export default Products;
