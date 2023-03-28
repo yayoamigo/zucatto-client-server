@@ -19,7 +19,7 @@ interface Props {
   sort: string | undefined;
 }
 
-interface ProductData {
+export interface ProductData {
   _id: string;
   title: string;
   desc: string;
@@ -54,8 +54,7 @@ const [filteredProducts, setFilteredProducts] = useState<ProductData[]>([]);
     
     getProducts();
   }, [cat]);
-  console.log('products', products)
-  console.log('filtered products', filteredProducts);
+
 
 
   useEffect(() => {
