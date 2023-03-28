@@ -6,6 +6,8 @@ import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
+
+
 function App() {
   //create routes, if there is no user, redirect to login page
   const user = true;
