@@ -6,12 +6,14 @@ import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
 import Sucess from "./pages/Sucess";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 
 
 function App() {
   //create routes, if there is no user, redirect to login page
-  const user = true;
+  const user = useSelector((state: any) => state.login.user);
+  console.log(user)
   return (
   <Router>
     <Routes>
