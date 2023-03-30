@@ -1,5 +1,21 @@
 import styled from "styled-components";
 import {mobile} from "../responsive";
+import { login } from "../redux/ducks/authDuck";
+import { useSelector, useDispatch } from 'react-redux';
+import { useRef} from "react";
+import { CircularProgress } from '@mui/material';
+import { ThunkDispatch } from 'redux-thunk';
+
+interface RootState {
+   login: {
+    currentUser: {
+      _id: string;
+    }
+    isFetching: boolean;
+    error: boolean;
+    };
+  };
+
 
 const Container = styled.div`
   width: 100vw;
@@ -58,14 +74,41 @@ const Link = styled.a`
 `;
 
 const Login = () => {
+  const username = useRef<HTMLInputElement>(null); 
+  const password = useRef<HTMLInputElement>(null); 
+  const isFetching = useSelector((state:RootState) => state.login.isFetching);
+  const dispatch: ThunkDispatch<RootState, void, any> = useDispatch();
+  const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
+    const usernameValue = username.current?.value;
+    const passwordValue = password.current?.value;
+    e.preventDefault();
+    dispatch(login({ username: usernameValue as string, password: passwordValue as string }))
+    console.log(usernameValue, passwordValue)
+  };
+  
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
-        <Form>
-          <Input placeholder="username" />
-          <Input placeholder="password" />
-          <Button>LOGIN</Button>
+        <Form onSubmit={handleClick}>
+          <Input 
+          placeholder="username" 
+          ref={username}
+          required
+          />
+          <Input 
+          placeholder="password"
+          ref={password}
+          required
+          type={"password"}
+          />
+          <Button className="loginButton" type="submit" disabled={isFetching}>
+          {isFetching ? (
+              <CircularProgress />
+            ) : (
+              "Log In"
+            )}
+          </Button>
           <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
         </Form>

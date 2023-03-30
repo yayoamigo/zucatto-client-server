@@ -178,6 +178,7 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state: any) => state.cart);
+  const accessToken = useSelector((state: any) => state.login.user.accessToken); // Get the access token
   const stripeRef = useRef(null);
   const [stripeToken, setStripeToken] = useState<any>(null);
   const navigate = useNavigate();
@@ -189,6 +190,7 @@ const Cart = () => {
   useEffect(() => {
     const makeRequest = async () => {
       if (stripeToken) {
+        
         const res = await userRequest.post("checkout/payment", {
           tokenId: stripeToken.id,
           amount: 500,
@@ -199,10 +201,10 @@ const Cart = () => {
             products: cart,
           },
         });
-      } 
+      }
     };
     stripeToken && makeRequest();
-  }, [stripeToken, cart.total, navigate]);
+  }, [stripeToken, cart.total, navigate, accessToken]); // Ad
 
   const handleStripeClick = () => {
     if (stripeRef && stripeRef.current) {
