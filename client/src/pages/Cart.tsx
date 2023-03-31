@@ -1,4 +1,3 @@
-import { useSelect } from "@mui/base";
 import { Add, Remove } from "@mui/icons-material";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
@@ -178,7 +177,6 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state: any) => state.cart);
-  const accessToken = useSelector((state: any) => state.login.user.accessToken); // Get the access token
   const stripeRef = useRef(null);
   const [stripeToken, setStripeToken] = useState<any>(null);
   const navigate = useNavigate();
@@ -190,7 +188,6 @@ const Cart = () => {
   useEffect(() => {
     const makeRequest = async () => {
       if (stripeToken) {
-        
         const res = await userRequest.post("checkout/payment", {
           tokenId: stripeToken.id,
           amount: 500,
@@ -204,7 +201,7 @@ const Cart = () => {
       }
     };
     stripeToken && makeRequest();
-  }, [stripeToken, cart.total, navigate, accessToken]); // Ad
+  }, [stripeToken, cart.total, navigate]); // Ad
 
   const handleStripeClick = () => {
     if (stripeRef && stripeRef.current) {
