@@ -77,7 +77,7 @@ const [filteredProducts, setFilteredProducts] = useState<ProductData[]>([]);
       {cat && filteredProducts.length
         ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
         : products
-            .slice(0, 8)
+            .slice(0, 10)
             .map((item) => <Product item={item} key={item._id} />)}
     </Container>
   );
