@@ -97,7 +97,7 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo src="ze.png" />
+          <Logo src="/ze.png" />
          
         </Center>
         <Right>
