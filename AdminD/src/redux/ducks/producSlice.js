@@ -31,6 +31,33 @@ export const deleteProducts = createAsyncThunk("productsDelete", async (id) => {
   }
 });
 
+export const updateProduct = createAsyncThunk('products/updateProduct',async ({ _id, updatedProduct }) => {
+    try {
+      const response = await userRequest.put(`/products/${_id}`, updatedProduct);
+      const data = response.data;
+      console.log("updateProduct response", data);
+      return data;
+    } catch (error) {
+      console.log("updateProduct error", error);
+      throw error;
+    }
+  }
+);
+
+
+//create products
+export const createProducts = createAsyncThunk("productsCreate", async (product) => {
+  try{
+    const response = await userRequest.post(`/products`, product);
+    const data = response.data;
+  return data;
+  }
+  catch (error) {
+    console.log(error);
+    throw error;
+  }
+});
+
 
 
 const productSlice = createSlice({
@@ -67,7 +94,33 @@ const productSlice = createSlice({
       .addCase(deleteProducts.rejected, (state) => {
         state.isFetching = false;
         state.error = true;
-      });  
+      })
+      .addCase(updateProduct.pending, (state) => {
+        state.isFetching = true;
+        state.error = false;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.isFetching = false;
+        state.products = state.products.map((item) =>
+          item._id === action.payload._id ? action.payload : item
+        );
+      })
+      .addCase(updateProduct.rejected, (state) => {
+        state.isFetching = false;
+        state.error = true;
+      })
+      .addCase(createProducts.pending, (state) => {
+        state.isFetching = true;
+        state.error = false;
+      })
+      .addCase(createProducts.fulfilled, (state, action) => {
+        state.isFetching = false;
+        state.products = [...state.products, action.payload];
+      })
+      .addCase(createProducts.rejected, (state) => {
+        state.isFetching = false;
+        state.error = true;
+      });
   },
 });
 

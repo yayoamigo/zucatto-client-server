@@ -28,19 +28,19 @@ export const sliderItems = [
     {
       id: 1,
       img: "/4.jpg",
-      title: "SHIRT STYLE!",
+      title: "BOYS",
       cat: "boys"
     },
     {
       id: 2,
       img: "/5.jpg",
-      title: "LOUNGEWEAR LOVE",
+      title: "WOMEN",
       cat: "women"
     },
     {
       id: 3,
       img: "/6.jpg",
-      title: "LIGHT JACKETS",
+      title: "SHIRTS",
       cat: "shirt"
     },
   ];
