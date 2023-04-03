@@ -3,13 +3,42 @@ import "./product.css";
 import Chart from "../../components/chart/Chart";
 import { Publish } from "@mui/icons-material";
 import { useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { userRequest } from "../../requestMethods";
+import { updateProduct } from "../../redux/ducks/producSlice";
+import { useDispatch } from "react-redux";
+import { getProducts } from "../../redux/ducks/producSlice";
 
 export default function Product() {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
   const [pStats, setPStats] = useState([]);
+  // saving changes in the inputs to update products with useREf
+  const name = useRef();
+  const desc = useRef();
+  const price = useRef();
+  const dispatch = useDispatch();
+
+  useEffect(() => { 
+    dispatch(getProducts());
+  }, [dispatch]);
+
+
+  const handleUpdate = async (e) => {
+  e.preventDefault();
+  dispatch(
+    updateProduct({
+      _id: productId,
+      updatedProduct: {
+        title: name.current.value,
+        desc: desc.current.value,
+        price: price.current.value,
+      },
+    })
+  );
+};
+
+  
 
   const product = useSelector((state) =>
     state.products.products.find((product) => product._id === productId)
@@ -68,13 +97,13 @@ export default function Product() {
         </div>
         <div className="productTopRight">
           <div className="productInfoTop">
-            <img src={product.img} alt="" className="productInfoImg" />
-            <span className="productName">{product.title}</span>
+            <img src={product?.img} alt="" className="productInfoImg" />
+            <span className="productName">{product?.title}</span>
           </div>
           <div className="productInfoBottom">
             <div className="productInfoItem">
               <span className="productInfoKey">id:</span>
-              <span className="productInfoValue">{product._id}</span>
+              <span className="productInfoValue">{product?._id}</span>
             </div>
             <div className="productInfoItem">
               <span className="productInfoKey">sales:</span>
@@ -82,20 +111,20 @@ export default function Product() {
             </div>
             <div className="productInfoItem">
               <span className="productInfoKey">in stock:</span>
-              <span className="productInfoValue">{product.inStock}</span>
+              <span className="productInfoValue">{product?.inStock}</span>
             </div>
           </div>
         </div>
       </div>
       <div className="productBottom">
-        <form className="productForm">
+        <form className="productForm" onSubmit={handleUpdate}>
           <div className="productFormLeft">
             <label>Product Name</label>
-            <input type="text" placeholder={product.title} />
+            <input  ref={name} type="text" placeholder={product?.title} />
             <label>Product Description</label>
-            <input type="text" placeholder={product.desc} />
+            <input ref={desc} type="text" placeholder={product?.desc} />
             <label>Price</label>
-            <input type="text" placeholder={product.price} />
+            <input ref={price} type="text" placeholder={product?.price} />
             <label>In Stock</label>
             <select name="inStock" id="idStock">
               <option value="true">Yes</option>
@@ -104,7 +133,7 @@ export default function Product() {
           </div>
           <div className="productFormRight">
             <div className="productUpload">
-              <img src={product.img} alt="" className="productUploadImg" />
+              <img src={product?.img} alt="" className="productUploadImg" />
               <label for="file">
                 <Publish />
               </label>

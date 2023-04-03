@@ -101,9 +101,13 @@ const Navbar = () => {
          
         </Center>
         <Right>
+        <Link to="/register" style={{ textDecoration: "none" }}>
           <MenuItem>REGISTER</MenuItem>
+          </Link>
+          <Link to="/login" style={{ textDecoration: "none" }}>
           <MenuItem>SIGN IN</MenuItem>
-          <Link to="/cart">
+          </Link>
+          <Link to="/cart" style={{ textDecoration: "none" }}>
           <MenuItem>
             <Badge badgeContent={quantity} color="warning">
               <ShoppingCartOutlined />

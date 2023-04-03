@@ -73,13 +73,11 @@ const [filteredProducts, setFilteredProducts] = useState<ProductData[]>([]);
   
 
   return (
-    <Container>
-      {cat && filteredProducts.length
-        ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
-        : products
-            .slice(0, 10)
-            .map((item) => <Product item={item} key={item._id} />)}
-    </Container>
+<Container>
+  {cat && filteredProducts.length
+    ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
+    : products.map((item) => <Product item={item} key={item._id} />)}
+</Container>
   );
 };
 
